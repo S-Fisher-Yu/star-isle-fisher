@@ -1,0 +1,35 @@
+name: 问题反馈
+description: 报告停止、判定或界面异常
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: 请先查看 README 和故障排查。截图请遮住个人信息，不要上传存档、账号凭据或完整游戏目录。
+  - type: input
+    id: versions
+    attributes:
+      label: 程序与插件版本
+      description: 填写主界面底部的两个版本，以及游戏近期是否更新。
+    validations:
+      required: true
+  - type: input
+    id: fishing_settings
+    attributes:
+      label: 钓鱼设置
+      description: 深度、模式、次数与分钟数。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 发生了什么
+      description: 写出复现步骤、预期结果和实际结果，并说明是否每次都会出现。
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: 停止原因与画面
+      description: 粘贴程序显示的停止原因，可附游戏弹窗和工具截图。只提供必要信息。
+    validations:
+      required: true

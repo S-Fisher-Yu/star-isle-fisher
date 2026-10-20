@@ -1,0 +1,14 @@
+build/
+vendor/
+*.exe
+*.dll
+*.pdb
+*.zip
+*.log
+*.tmp
+game-path.txt
+status.txt
+command.txt
+.env
+.env.*
+!.env.example
