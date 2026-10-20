@@ -2,6 +2,11 @@
 
 [English](#english-manual) | [简体中文](#chinese-manual)
 
+![Star Isle Fisher main window / 星屿渔夫主界面](docs/images/main-window.png)
+
+*Main window in preview mode; no fishing task is running in this preview.*  
+*主界面预览；图中未运行钓鱼任务。*
+
 <a id="english-manual"></a>
 
 # English manual
