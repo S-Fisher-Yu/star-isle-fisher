@@ -26,6 +26,17 @@ The application currently uses Chinese interface labels. The English instruction
 - Automatic Steam library detection, with manual game path selection when needed.
 - A pixel-art interface with a seaside background, fisherman icon and separate settings panel.
 
+## How it works
+
+Star Isle Fisher has two parts: a control window and a small helper running inside the game.
+
+1. **The control window sends instructions.** When you set the cast and time limits and click Start, the controller writes a command to a small local file. The in-game plugin reads it and writes back status and catch counts for the window to display.
+2. **BepInEx loads the plugin.** BepInEx is a plugin loader that lets our C# code run alongside the game and read its fishing state.
+3. **The plugin checks the timing each frame.** It reads the positions of the needle and the blue and orange target zones directly from the game. When an orange zone is present, it takes priority. Once the needle enters the central part of the selected zone, the plugin calls the game's existing timing-check function. For multi-stage fishing, it repeats this for each stage. After a catch, it closes the reward window and starts the next cast while the session remains active. The game still decides the result and awards the catch.
+4. **The game keeps updating in the background.** During a session, the plugin enables Unity's background-running setting. Fishing does not move your system mouse or send simulated keyboard input, so you can use other applications. The session stops at a cast or time limit, when you stop it with the controller or F8, or when a condition such as a timeout or error requires it to stop. The previous background-running setting is then restored.
+
+All of this uses local rules. No AI model is involved while fishing, and running the tool does not consume chat tokens. The game must remain open and the computer must stay awake.
+
 ## Requirements
 
 Use Windows 10/11, a 64-bit installation of CELESTAY, and a game version compatible with the plugin. The installer checks the game files; a game update may require a plugin update.
@@ -117,6 +128,17 @@ Project-owned source code and documentation are licensed under the [MIT License]
 - 渔获统计：分别显示捕获、完美、失败和抛竿次数。
 - 路径查找：自动查找 Steam 游戏库，也可手动选择游戏位置。
 - 像素界面：海景背景、草帽渔夫图标和独立设置面板。
+
+## 工作原理
+
+星屿渔夫由两部分组成：一个控制窗口，加一个运行在游戏里的“小助手”。
+
+1. **控制窗口负责传话。** 你设置次数、时长并点击开始后，窗口把指令写进一个本地小文件。游戏里的插件读取指令，再把运行状态和捕获数量写回来，供窗口显示。
+2. **BepInEx 负责加载插件。** BepInEx 是一个插件加载器，让我们写的 C# 程序随游戏一起运行，能够读取游戏内部的钓鱼状态。
+3. **插件逐帧寻找收竿时机。** 它直接读取游戏中指针、蓝条和橙条的位置。有橙条就优先瞄准橙条；指针进入所选目标的中央区域时，调用游戏原本的判定功能。多段钓鱼就逐段重复这个过程，整竿完成后，在任务仍运行的情况下关闭奖励并开始下一竿。最终是否成功、获得什么奖励，仍由游戏自己的规则决定。
+4. **后台运行靠游戏继续更新。** 任务运行时，插件开启 Unity 的“后台继续运行”设置。钓鱼过程不移动系统鼠标，也不模拟键盘输入，所以你可以同时使用其他软件。达到次数或时间上限、通过控制窗口或 F8 停止，或遇到超时、错误等需要停止的情况时，任务就会结束，并恢复原来的后台运行设置。
+
+这些都是本地规则判断。挂机时不需要 AI 模型参与，也不会消耗对话 token；游戏需要保持运行，电脑需要保持唤醒。
 
 ## 使用前准备
 
